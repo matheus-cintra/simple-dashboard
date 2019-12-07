@@ -7,29 +7,38 @@ const UserSchema = new Schema(
       type: String,
       required: true,
       minlength: 2,
-      maxlength: 50
+      maxlength: 50,
     },
     email: {
       type: String,
       required: true,
       trim: true,
       lowercase: true,
-      unique: true
+      unique: true,
     },
     password: {
       type: String,
       required: true,
       minlength: 8,
-      select: false
+      select: false,
     },
     emailConfirmed: {
       type: Boolean,
       default: false,
       required: true,
-      select: false
-    }
+      select: false,
+    },
+    activateToken: {
+      type: String,
+      required: true,
+    },
+    createdOn: {
+      type: Date,
+      default: Date.now(),
+      required: true,
+    },
   },
-  { versionKey: false }
+  { versionKey: false },
 );
 
 async function cryptPass(next) {

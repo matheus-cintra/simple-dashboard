@@ -15,8 +15,10 @@ const login = async ({ body: { password } }, res) => {
       return res.status(400).json({ Error: `Passwords doesn't match` });
     }
 
+    const jwt = Jwt.encode({ name: user.name }, { expiresIn: '1day' });
+
     setCookieJwt(res, jwt);
-    return res.status(200).json({ message: 'Usuario logado' });
+    return res.status(200).json({ message: `Usuario logado ${jwt}` });
   } catch (err) {
     return res.status(404).json({ message: 'Senha incorreta' });
   }
